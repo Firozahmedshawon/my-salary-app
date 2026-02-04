@@ -28,25 +28,15 @@ jobs:
 
       - name: Build Android APK
         run: |
-          # সব পুরনো কনফিগ পরিষ্কার করা
-          rm -rf android
-          rm -rf capacitor.config.json
-          
-          # নতুন করে সবকিছু ইনপুট দেওয়া
+          # একদম ফ্রেশ শুরু
+          rm -rf android capacitor.config.json
           npx cap init "SalaryApp" "com.hakam.salary" --web-dir dist
           npx cap add android
           npx cap sync
           
-          # অ্যান্ড্রয়েড লাইসেন্স অ্যাকসেপ্ট করা (এটি খুব গুরুত্বপূর্ণ)
-          yes | sdkmanager --licenses || true
-          
+          # মেমোরি সমস্যা এড়াতে এবং লাইসেন্স ফিক্স করতে
           cd android
+          echo "org.gradle.jvmargs=-Xmx2048m" >> local.properties
           chmod +x gradlew
-          ./gradlew assembleDebug
-
-      - name: Upload APK
-        uses: actions/upload-artifact@v4
-        with:
-          name: Salary-App-Final
-          path: android/app/build/outputs/apk/debug/app-debug.apk
+          ./gradlew assembleDebug --stacktrace
 
