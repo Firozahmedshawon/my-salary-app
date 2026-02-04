@@ -13,7 +13,9 @@ jobs:
           node-version: 22
 
       - name: Install Dependencies
-        run: npm install
+        run: |
+          npm install
+          npm install @capacitor/cli @capacitor/android @capacitor/core
 
       - name: Build Web App
         run: npm run build
@@ -26,13 +28,18 @@ jobs:
 
       - name: Build Android APK
         run: |
-          npm install @capacitor/cli @capacitor/android @capacitor/core
-          # পুরনো সব মুছে ফেলা
+          # সব পুরনো কনফিগ পরিষ্কার করা
           rm -rf android
-          # এখানে সরাসরি ID এবং Name দিয়ে ইনিশিয়ালাইজ করা হচ্ছে
+          rm -rf capacitor.config.json
+          
+          # নতুন করে সবকিছু ইনপুট দেওয়া
           npx cap init "SalaryApp" "com.salary.app" --web-dir dist
           npx cap add android
           npx cap sync
+          
+          # অ্যান্ড্রয়েড লাইসেন্স অ্যাকসেপ্ট করা (এটি খুব গুরুত্বপূর্ণ)
+          yes | sdkmanager --licenses || true
+          
           cd android
           chmod +x gradlew
           ./gradlew assembleDebug
