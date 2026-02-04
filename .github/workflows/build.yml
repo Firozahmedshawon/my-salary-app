@@ -5,12 +5,12 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4 # আপডেট করা হয়েছে v4 এ
+      - uses: actions/checkout@v4
 
       - name: Set up Node.js
-        uses: actions/setup-node@v4 # আপডেট করা হয়েছে v4 এ
+        uses: actions/setup-node@v4
         with:
-          node-version: 18
+          node-version: 20 # এখানে ১৮ এর বদলে ২০ করে দেওয়া হয়েছে
 
       - name: Install Dependencies
         run: npm install
@@ -20,7 +20,7 @@ jobs:
 
       - name: Install Capacitor Android
         run: |
-          npm install @capacitor/android
+          npm install @capacitor/android @capacitor/core @capacitor/cli
           npx cap add android || true
           npx cap sync
 
@@ -37,7 +37,7 @@ jobs:
           ./gradlew assembleDebug
 
       - name: Upload APK
-        uses: actions/upload-artifact@v4 # v3 এর বদলে v4 ব্যবহার করা হয়েছে
+        uses: actions/upload-artifact@v4
         with:
           name: app-debug
           path: android/app/build/outputs/apk/debug/app-debug.apk
