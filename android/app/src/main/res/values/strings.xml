@@ -1,0 +1,7 @@
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
+    <string name="app_name">my-salary-app</string>
+    <string name="title_activity_main">my-salary-app</string>
+    <string name="package_name">com.salary.app</string>
+    <string name="custom_url_scheme">com.salary.app</string>
+</resources>
