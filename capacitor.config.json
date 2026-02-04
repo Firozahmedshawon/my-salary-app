@@ -1,5 +1,6 @@
 {
-  "appId": "com.hakam.salary",
+  "appId": "com.salary.app",
   "appName": "SalaryApp",
   "webDir": "dist"
+  "bundledWebRuntime": false
 }

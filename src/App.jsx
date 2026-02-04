@@ -7,7 +7,7 @@ import { exportToExcel } from "./utils/exportExcel";
 
 export default function App() {
   const [loggedIn, setLoggedIn] = useState(localStorage.getItem("loggedIn") === "true")
-  const [company, setCompany] = useState("এম ডি আল হাকাম")
+  const [company, setCompany] = useState("Ship Name")
   const [month, setMonth] = useState("জানুয়ারি")
   const [totalDays, setTotalDays] = useState(31)
   const [workers, setWorkers] = useState(() => {
