@@ -13,7 +13,7 @@ jobs:
           node-version: 20
 
       - name: Install Dependencies
-        run: npm install
+        run: npm install --force
 
       - name: Build Web App
         run: npm run build
@@ -26,7 +26,6 @@ jobs:
 
       - name: Install Capacitor Android
         run: |
-          npm install @capacitor/core @capacitor/cli @capacitor/android
           npx cap init "SalaryApp" "com.hakam.salary" --web-dir dist || true
           npx cap add android || true
           npx cap sync
