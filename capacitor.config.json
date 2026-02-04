@@ -1,5 +1,5 @@
 {
-  "appId": "com.salary.app",
-  "appName": "my-salary-app",
+  "appId": "com.hakam.salary",
+  "appName": "SalaryApp",
   "webDir": "dist"
 }

@@ -24,9 +24,10 @@ jobs:
           java-version: '17'
           distribution: 'temurin'
 
-      - name: Setup Android Project
+      - name: Install Capacitor Android
         run: |
-          npm install @capacitor/android
+          npm install @capacitor/core @capacitor/cli @capacitor/android
+          npx cap init "SalaryApp" "com.hakam.salary" --web-dir dist || true
           npx cap add android || true
           npx cap sync
 

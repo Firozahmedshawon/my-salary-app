@@ -1,4 +1,4 @@
-package com.salary.app;
+package com.hakam.salary;
 
 import com.getcapacitor.BridgeActivity;
 

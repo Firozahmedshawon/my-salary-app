@@ -1,10 +1,10 @@
 apply plugin: 'com.android.application'
 
 android {
-    namespace = "com.salary.app"
+    namespace = "com.hakam.salary"
     compileSdk = rootProject.ext.compileSdkVersion
     defaultConfig {
-        applicationId "com.salary.app"
+        applicationId "com.hakam.salary"
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
         versionCode 1
