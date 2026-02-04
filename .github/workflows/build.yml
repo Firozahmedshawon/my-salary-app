@@ -27,13 +27,12 @@ jobs:
       - name: Build Android APK
         run: |
           npm install @capacitor/cli @capacitor/android @capacitor/core
-          # গিটহাবের পুরনো ফাইল পরিষ্কার করা
+          # পুরনো সব মুছে ফেলা
           rm -rf android
-          rm -rf www
-          # নতুন করে অ্যান্ড্রয়েড সেটআপ
+          # এখানে সরাসরি ID এবং Name দিয়ে ইনিশিয়ালাইজ করা হচ্ছে
+          npx cap init "SalaryApp" "com.salary.app" --web-dir dist
           npx cap add android
-          # জোরপূর্বক 'dist' ফোল্ডার সিঙ্ক করা (এটিই আপনার এরর দূর করবে)
-          npx cap sync --web-dir dist
+          npx cap sync
           cd android
           chmod +x gradlew
           ./gradlew assembleDebug
@@ -41,6 +40,6 @@ jobs:
       - name: Upload APK
         uses: actions/upload-artifact@v4
         with:
-          name: Salary-App-New
+          name: Salary-App-Final
           path: android/app/build/outputs/apk/debug/app-debug.apk
 
