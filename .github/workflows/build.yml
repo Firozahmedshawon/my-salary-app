@@ -26,10 +26,14 @@ jobs:
 
       - name: Build Android APK
         run: |
-          npm install @capacitor/cli @capacitor/android
-          # এখানে '|| true' যোগ করা হয়েছে যাতে আগে থেকে ফোল্ডার থাকলেও এরর না দেয়
-          npx cap add android || echo "Android folder already exists, skipping add..."
-          npx cap sync
+          npm install @capacitor/cli @capacitor/android @capacitor/core
+          # গিটহাবের পুরনো ফাইল পরিষ্কার করা
+          rm -rf android
+          rm -rf www
+          # নতুন করে অ্যান্ড্রয়েড সেটআপ
+          npx cap add android
+          # জোরপূর্বক 'dist' ফোল্ডার সিঙ্ক করা (এটিই আপনার এরর দূর করবে)
+          npx cap sync --web-dir dist
           cd android
           chmod +x gradlew
           ./gradlew assembleDebug
@@ -37,6 +41,6 @@ jobs:
       - name: Upload APK
         uses: actions/upload-artifact@v4
         with:
-          name: app-debug
+          name: Salary-App-New
           path: android/app/build/outputs/apk/debug/app-debug.apk
 
