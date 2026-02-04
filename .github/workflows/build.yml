@@ -10,7 +10,7 @@ jobs:
       - name: Set up Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: 22  # নোড ভার্সন ২২ এখানে ফিক্স করা হয়েছে
+          node-version: 22
 
       - name: Install Dependencies
         run: |
@@ -28,19 +28,22 @@ jobs:
 
       - name: Build Android APK
         run: |
-          # পুরনো সব কনফিগ এবং অ্যান্ড্রয়েড ফোল্ডার মুছে ফ্রেশ শুরু করা
+          # সব পুরনো ফাইল মুছে একদম নতুন করে শুরু করা
           rm -rf android capacitor.config.json
           npx cap init "SalaryApp" "com.hakam.salary" --web-dir dist
           npx cap add android
           npx cap sync
           
           cd android
+          # অ্যান্ড্রয়েড মেমোরি ফিক্স
+          echo "org.gradle.jvmargs=-Xmx2048m -XX:MaxMetaspaceSize=512m" >> local.properties
           chmod +x gradlew
-          ./gradlew assembleDebug --no-daemon
-          
+          # বিল্ড কমান্ড (একদম ক্লিয়ার মেসেজ সহ)
+          ./gradlew assembleDebug --no-daemon --stacktrace
+
       - name: Upload APK
         uses: actions/upload-artifact@v4
         with:
-          name: Salary-App-Final
+          name: My-Salary-App
           path: android/app/build/outputs/apk/debug/app-debug.apk
 
