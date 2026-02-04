@@ -1,11 +1,9 @@
-import { useState, useEffect } from "react"
+import React, { useState, useEffect } from "react";
 import { LogOut, Plus, Trash2, Edit3, Download, FileSpreadsheet } from "lucide-react";
 import html2pdf from "html2pdf.js";
 import * as XLSX from 'xlsx';
-import Login from "./components/Login"
-import { exportToExcel } from "./utils/exportExcel"
-import { Trash2, Edit3, Download, LogOut, Plus } from "lucide-react"; 
-import html2pdf from "html2pdf.js";
+import Login from "./components/Login";
+import { exportToExcel } from "./utils/exportExcel";
 
 export default function App() {
   const [loggedIn, setLoggedIn] = useState(localStorage.getItem("loggedIn") === "true")
@@ -17,7 +15,6 @@ export default function App() {
     return saved ? JSON.parse(saved) : []
   })
 
-  // ফর্ম স্টেট
   const [name, setName] = useState("")
   const [position, setPosition] = useState("")
   const [basicSalary, setBasicSalary] = useState("")
@@ -76,7 +73,6 @@ export default function App() {
 
   return (
     <div className="min-h-screen bg-[#F3F4F6] pb-10 font-sans">
-      {/* Header */}
       <div className="bg-gradient-to-r from-indigo-700 to-blue-600 p-6 rounded-b-[40px] shadow-lg mb-6">
         <div className="flex justify-between items-center">
             <h1 className="text-white text-xl font-bold">{company}</h1>
@@ -89,7 +85,6 @@ export default function App() {
       </div>
 
       <div className="max-w-md mx-auto px-4">
-        {/* Statistics and Export */}
         <div className="bg-white p-4 rounded-2xl shadow-sm mb-6 flex justify-between items-center border border-indigo-50">
            <div>
              <p className="text-xs text-slate-400 uppercase tracking-wider">চলতি মাস</p>
@@ -99,11 +94,10 @@ export default function App() {
              onClick={() => exportToExcel(workers, month)}
              className="bg-emerald-100 text-emerald-700 px-4 py-2 rounded-xl text-sm font-bold flex items-center gap-1 active:scale-95 transition"
            >
-             📥 এক্সেল
+             <FileSpreadsheet size={16} /> এক্সেল
            </button>
         </div>
 
-        {/* Worker List */}
         <h2 className="text-slate-800 font-bold mb-3 flex items-center gap-2">
            <span className="w-2 h-6 bg-indigo-600 rounded-full"></span> শ্রমিক তালিকা ({workers.length})
         </h2>
@@ -130,16 +124,15 @@ export default function App() {
                   <button onClick={() => { 
                     setName(w.name); setPosition(w.position); setBasicSalary(w.basicSalary); 
                     setDays(w.days); setAllowance(w.allowance); setAdvance(w.advance); setEditIndex(i); 
-                    window.scrollTo({top: document.body.scrollHeight, behavior: 'smooth'})
-                  }} className="flex-1 bg-blue-50 text-blue-600 py-2 rounded-xl text-sm font-bold active:scale-95">এডিট</button>
-                  <button onClick={() => deleteWorker(i)} className="flex-1 bg-red-50 text-red-600 py-2 rounded-xl text-sm font-bold active:scale-95">মুছুন</button>
+                    window.scrollTo({top: 0, behavior: 'smooth'})
+                  }} className="flex-1 bg-blue-50 text-blue-600 py-2 rounded-xl text-sm font-bold flex items-center justify-center gap-1"><Edit3 size={14}/> এডিট</button>
+                  <button onClick={() => deleteWorker(i)} className="flex-1 bg-red-50 text-red-600 py-2 rounded-xl text-sm font-bold flex items-center justify-center gap-1"><Trash2 size={14}/> মুছুন</button>
                 </div>
               </div>
             ))
           )}
         </div>
 
-        {/* Form Section */}
         <div className="bg-white p-6 rounded-[30px] shadow-xl border border-indigo-100">
           <h2 className="font-black text-xl text-slate-800 mb-5 text-center">
             {editIndex !== null ? "📝 তথ্য সংশোধন" : "➕ নতুন শ্রমিক"}
