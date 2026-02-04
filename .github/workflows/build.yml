@@ -33,7 +33,7 @@ jobs:
           rm -rf capacitor.config.json
           
           # নতুন করে সবকিছু ইনপুট দেওয়া
-          npx cap init "SalaryApp" "com.salary.app" --web-dir dist
+          npx cap init "SalaryApp" "com.hakam.salary" --web-dir dist
           npx cap add android
           npx cap sync
           
