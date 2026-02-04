@@ -3,6 +3,8 @@ import { LogOut, Plus, Trash2, Edit3, Download, FileSpreadsheet } from "lucide-r
 import html2pdf from "html2pdf.js";
 import Login from "./components/Login"
 import { exportToExcel } from "./utils/exportExcel"
+import { Trash2, Edit3, Download, LogOut, Plus } from "lucide-react"; 
+import html2pdf from "html2pdf.js";
 
 export default function App() {
   const [loggedIn, setLoggedIn] = useState(localStorage.getItem("loggedIn") === "true")
